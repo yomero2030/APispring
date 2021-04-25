@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    
+    th:replace="~{fragments/layout :: layout (~{::body},'rep')}">
+    <head>
+        <title>Records</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <style>
+            th {
+                background-color: #29B6F6 !important;
+                color: white;
+            }
+        </style>  
+        <div style="display:flex"><h1 style="margin:auto; margin-top: 20px; margin-bottom:20px;">Records de inicio de sesion</h1></div>
+        <div style="width: 100%;display: flex">
+            <table style="margin:auto; width:80%"  id="vets" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Descripcion</th>
+                        <th>Email</th>
+                        <th>Fecha</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="record : ${records}">                                    
+                        <td th:text="${record.type}"/>
+                        <td th:text="${record.description}"/>                  
+                        <td th:text="${record.user_email}"/>                    
+                        <td th:text="${record.record_date}"/>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+<html 
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+    th:replace="~{fragments/layout :: layout (~{::body},'rep')}">
+
+    <body>
+        
+        <style>
+            .btn{
+                margin-top: 20px;
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                background-color: #29B6F6;
+                color: white;
+                width: 100%;
+            }
+        </style>
+        <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 20px" th:text="Especialidades"></h1></div>
+        <div style="display:flex; height: 80vh;">
+            <div style="width:500px;height: 100%; margin: auto;">
+                <a th:text="#{verTodo}" th:href="@{/appointment/report/-2}" class="btn"/>
+                <a th:text="#{confirmado}" th:href="@{/appointment/report/-1}" class="btn"/>
+                <a th:text="#{noConfirmado}" th:href="@{/appointment/report/0}" class="btn"/>
+                <span th:each="specialtie : ${allSpecialties}">
+                    <a th:text="${specialtie.nombre}" th:href="@{/appointment/report/__${specialtie.id}__}" class="btn"></a>
+                </span>                
+            </div>
+        </div>
+    </body>
+</html>

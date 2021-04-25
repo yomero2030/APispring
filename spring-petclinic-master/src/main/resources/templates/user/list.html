@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html
+    th:replace="~{fragments/layout :: layout (~{::body},'list')}">
+    
+    <body>
+        <style>
+            .button{
+                height: 30px;
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                margin-bottom:10px;
+                color: white;
+                background-color: #29B6F6 !important;
+            }
+            
+            th {
+                background-color: #29B6F6!important;
+                color: white;
+            }
+        </style>
+        <br><br>
+        <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 20px">Usuarios Existentes</h1></div>
+        <div class="row">
+            <div  style="width:80%; margin:auto;">
+            <div class="col-sm-2" style="margin-right:50px;">
+                <a 
+                    class="btn button"
+                    type="button" 
+                    href="/admin/user/owners"> Ver solo propietarios </a>
+                    
+            </div>
+            <div class="col-sm-2">
+                <a  class="btn button"
+                    type="button" 
+                    href="/user/create"> Crear usuario </a>   
+            </div>
+            </div>
+        </div>
+        <div style="width: 100%;display: flex">
+            <table style="margin:auto; width:80%" id="vets" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Zipcode</th>
+                <th>Active</th>
+                <th>Telephone</th>
+                <th>Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr th:each="user : ${users}">
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+                    <td th:text="${user.city}"></td>
+                    <td th:text="${user.zipcode}"></td>
+                    <td th:text="${user.active} == '1'? 'Si':'No'"></td>
+                    <td th:text="${user.telephone} == ''? 'Sin numero':${user.telephone}"></td>
+                    <td>
+                        <a th:href="@{/user/update/__${user.id}__}" class="btn button" />Editar</a>
+                        <th:block th:if="${user.active} == '1'">
+                            <a class="btn button" data-toggle="modal" data-target="#exampleModal" th:id="${user.id}" onclick="btn_delete(this.id)" >Desactivar</a>
+                        </th:block>
+                        <th:block th:unless="${user.active} == '1'">
+                            <a class="btn button" data-toggle="modal" data-target="#exampleModal" th:id="${user.id}" onclick="btn_delete(this.id)" >Activar</a>
+                        </th:block>            
+                    </td>
+              </tr>
+            </tbody>
+        </table>
+       
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 aria-hidden="true">Advertencias</h1>
+              </div>
+              <div class="modal-body">
+                  <p>Estas seguro de cambiar este valor?</p>
+              </div>
+              <div class="modal-footer">
+                  <a id="delete_user" class="btn button" style="width: 20%" >Si</a>
+                <button type="button" class="btn button" data-dismiss="modal" style="width: 20%">No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    //th:href="@{/user/delete/__${user.id}__}" 
+    function btn_delete(id){
+        document.getElementById("delete_user").href = "/user/delete/"+id
+    }
+</script>

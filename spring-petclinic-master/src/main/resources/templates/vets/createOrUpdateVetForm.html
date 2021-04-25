@@ -1,0 +1,62 @@
+<html xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'vets')}">
+
+<body>
+    <style>
+            button, .btn-default{
+                width: 100%;
+                height: 30px;
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                color: white;
+                background-color: #212121 !important;
+            }
+        </style>
+    
+    
+    <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 20px" th:text="#{Vet}">Vets</h1></div>
+    <div class="col-xs-13 col-sm-3 col-md-3 col-lg-3"></div>
+    <div class="col-xs-13 col-sm-5 col-md-5 col-lg-6">
+        <form th:object="${vet}" class="form-horizontal" id="add-owner-form" method="post">
+        <div class="form-group has-feedback">
+            <input
+            th:replace="~{fragments/inputField :: input (#{Name}, 'firstName', 'text')}" />
+
+             <input
+            th:replace="~{fragments/inputField :: input (#{Last}, 'lastName', 'text')}" />
+
+               <input
+            th:replace="~{fragments/selectField :: select (#{Special},'specialty', ${specialties})}" />
+
+    <!--      <input
+            th:replace="~{fragments/inputField :: input (#{Special}, 'specialty', 'text')}" />-->
+
+
+    <!--<div style = "padding-left: 130px" class = "form-group">
+        <label>Especialidad: </label>
+    <select class=" form-control " name="specialty">
+        <option value="none">none</option>
+        <option value="dentisty">dentisty</option>
+        <option value="surgery">surgery</option>
+        <option value="radiology">radiology</option>  
+    </select>-->
+    </div>
+
+          <input
+            th:replace="~{fragments/inputField :: input (#{Telephone}, 'telephone', 'text')}" />
+
+           <input
+            th:replace="~{fragments/inputField :: input (#{Hour}, 'Schedule', 'text')}" />
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-3 col-sm-6">
+            <button
+              th:with="text=${vet['new']} ? #{CV} : 'Actualizar vet'"
+              class="btn btn-default" type="submit" th:text="${text}">Add vet</button>
+          </div>
+        </div>
+      </form>
+    </div>
+</body>
+</html>

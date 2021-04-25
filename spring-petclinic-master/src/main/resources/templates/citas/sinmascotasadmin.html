@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+    <body>
+        
+        <style>
+            .btn{
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                background-color: #29B6F6;
+                color: white;
+                width: 100%;
+            }
+        </style>
+        <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 10px; margin-bottom: 40px">TAL PARECE QUE ESTE OWNER NO TIENE MASCOTAS</h1></div>
+        <div style="display:flex;">
+            <div style="width:60%; margin:auto;">
+                <form th:object="${citas}" class="form-horizontal" id="add-owner-form" method="post">
+                    <div class="form-group has-feedback">
+
+                    Por favor agrega una mascota e intenta de nuevo
+                    </div>
+                </form>
+            </div>         
+        </div>
+    </body>
+</html>

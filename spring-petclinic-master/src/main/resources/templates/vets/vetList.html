@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'vets')}">
+
+<body>
+        <style>
+            .button{
+                height: 30px;
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                margin-bottom:10px;
+                color: white;
+                background-color: #29B6F6 !important;
+            }
+            
+            th {
+                background-color: #29B6F6!important;
+                color: white;
+            }
+        </style>
+  <h2>Veterinarians</h2>
+
+  <table id="vets" class="table table-striped">
+    <thead>
+      <tr>
+        <th th:text="#{Name}">Name</th>
+        <th th:text="#{Special}">Specialties</th>
+        <th th:text="#{Telephone}">Telephone</th>
+        <th th:text="#{Hour}">Schedule</th>        
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="vet : ${selections}">
+         <td>
+             <a th:href="@{/vets/__${vet.id}__}" th:text="${vet.firstName + ' ' + vet.lastName}"/></a>     
+         </td>
+        <td><span
+          th:text="${vet.specialty}" /></td>
+          <td th:text="${vet.telephone}"></td>
+          <td th:text="${vet.schedule}"></td>
+      </tr>
+    </tbody>
+  </table><br>
+<center><a th:text="#{CV}" class="btn btn-default" th:href="@{/vets/new}">Create</a></center>
+  
+  
+</body>
+
+</html>

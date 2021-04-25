@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'home')}">
+    <body>
+        <!--<script type="text/javascript" src="jquery-3.3.1.min.js"></script>-->
+        <style>
+            .btn{
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                background-color: #212121;
+                color: white;
+                width: 100%;
+            }
+        </style>
+        <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 10px; margin-bottom: 40px">Seleccione Mascota</h1></div>
+        <div style="display:flex;">
+            <div style="width:60%; margin:auto;">
+     
+                <form th:object="${citas}" class="form-horizontal" id="add-owner-form" method="post">
+                    <div class="form-group has-feedback">
+
+                        Mascota
+                        <select th:field="*{mascota}">
+                            <span th:each="mascota : ${idowner}">
+                                <option  th:value="${mascota.id}" th:text="${mascota.name}"/>
+                            </span>
+                        </select>
+                        
+                        
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-7">
+                            <button id="btn"
+                                    th:with="text=Cita"
+                                    class="btn" type="submit" th:text="${text}">Add Cita</button>
+                        </div>
+                    </div>
+                    
+                </form>   
+            </div>         
+        </div>
+    </body>
+</html>

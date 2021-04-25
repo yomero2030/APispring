@@ -1,0 +1,38 @@
+<html>
+    <body>
+        <form>
+            <th:block th:fragment="input (label, name, type)">
+                <div th:with="valid=${!#fields.hasErrors(name)}"
+                     th:class="${'form-group' + (valid ? '' : ' has-error')}"
+                     class="form-group">
+                    <h3 class="col-sm-2 control-label" th:text="${label}">Label</h3>
+                    <div class="col-sm-10">
+                        <div th:switch="${type}">
+                            <textarea th:case="'textarea'" class="form-control" th:field="*{__${name}__}" th:placeholder="${label}" style="resize:none"/>
+                            <input th:case="'text'" class="form-control" type="text" th:field="*{__${name}__}" />
+                            <input th:case="'number'" maxlength="10" pattern=".{5,10}" title="5 to 10 characters" class="form-control" required type="number" th:field="*{__${name}__}" />
+                            <input th:case="'text_required'" class="form-control" required type="text" th:field="*{__${name}__}" />
+                            <input th:case="'username'"  class="form-control" required type="text" th:field="*{__${name}__}" />
+                            <input th:case="'password'" class="form-control" type="password" th:field="*{__${name}__}" />
+                            <input th:case="'email'" class="form-control" required type="email" th:field="*{__${name}__}" />
+                            <input th:case="'time'" class="form-control" type="time" th:field="*{__${name}__}"
+                                   placeholder="HH-MM Hrs" title="Enter a date in this format: HH-MM"
+                                   />
+                            <input th:case="'checkbox'" class="form-control" type="checkbox" th:value="1" th:field="*{__${name}__}" />
+                            <input th:case="'date'" class="form-control" type="date" th:field="*{__${name}__}" />
+                        </div>
+                        <span th:if="${valid}"
+                              class="glyphicon glyphicon-ok form-control-feedback"
+                              aria-hidden="true"></span>  
+                        <th:block th:if="${!valid} and ${name} != 'zipcode' and ${name} != 'email'">
+                            <span
+                                class="glyphicon glyphicon-remove form-control-feedback"
+                                aria-hidden="true"></span>
+                            <span class="help-inline" th:errors="*{__${name}__}">Error</span>
+                        </th:block>
+                    </div>
+                </div>
+            </th:block>
+        </form>
+    </body>
+</html>

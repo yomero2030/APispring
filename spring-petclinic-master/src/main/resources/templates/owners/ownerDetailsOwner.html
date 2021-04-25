@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout_owner :: layout (~{::body},'owners')}">
+
+    <body>
+        <style>
+           
+
+
+        </style>      
+
+        <div style="width: 100%; display:flex;">
+            <div style="display:flex; margin-top: 20px;">
+
+                <a style="margin-left:190px;" th:text="#{anp}" th:href="@{/owner/pets/new}" class="btn btn-default">Add
+                    New Pet</a>
+            </div>
+        </div>
+
+        <div style="display:flex"><h2 style="width:100%; text-align: center; margin-top: 20px"  th:text="#{pv}">Pets and Visits</h2></div>
+        <div style="width: 100%;display: flex">
+            <table style="margin:auto; width:80%"  class="table table-striped">
+
+                <tr th:each="pet : ${owner.pets}">
+                    <td valign="top">
+                        <dl class="dl-horizontal">
+                            <dt th:text="#{fn}">Name</dt>
+                            <dd th:text="${pet.name}" /></dd>
+                            <dt th:text="#{bd}">Birth Date</dt>
+                            <dd
+                                th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}" /></dd>
+                            <dt th:text="#{ty}">Type</dt>
+                            <dd th:text="${pet.type}" /></dd>
+                        </dl>
+                    </td>
+                    <td valign="top">
+                        <table class="table-condensed">
+                            
+                            <tr th:each="visit : ${pet.visits}">
+                                <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"></td>
+                                <td th:text="${visit?.description}"></td>
+                            </tr>   
+                            <tr>
+                                <td><a class="style-options btn btn-default"
+                                       th:text="#{ep}" th:href="@{/owner/pets/{petId}/edit(petId=${pet.id})}">Edit
+                                        Pet</a></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </body>
+
+</html>

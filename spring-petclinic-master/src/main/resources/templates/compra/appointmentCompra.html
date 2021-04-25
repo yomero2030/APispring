@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout_owner :: layout (~{::body},'home')}">
+    <body>
+        
+        <style>
+            .btn{
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                background-color: #29B6F6;
+                color: white;
+                width: 100%;
+            }
+        </style>
+        <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 10px; margin-bottom: 40px">compra</h1></div>
+        <div style="display:flex;">
+            <div style="width:60%; margin:auto;">
+                <form th:object="${compra}" class="form-horizontal" id="add-owner-form" method="post">
+                    <div class="form-group has-feedback">
+                        
+                        <!-- div clas="form-Group">
+                            <label th:text="#{o}" class="col-sm-2 control-label">Owner</label>
+                            <div class="col-sm-10" style="margin-top:7px;">
+                                <span  th:text="${.owner?.firstName + ' ' + compra.owner?.lastName}" />
+                            </div>
+                
+                        </div -->
+                        
+                 
+
+                        <!-- input
+                            th:replace="~{fragments/inputField :: input ('Hora', 'hora', 'time')}" / -->
+                        
+                        Especialidad
+                         <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        
+                        
+                    
+                        
+                        <br>
+                        
+                        Mascota
+                        <!-- select th:field="*{mascota}">
+                            <span th:each="mascota : ${idowner.pets}">
+                                <option  th:value="${mascota.id}" th:text="${mascota.name}"/>
+                            </span>
+                        </select -->
+                         
+                         <table class="payment">
+                        <tr>
+                            <th>Metodo de Pago</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td>Tarjeta</td>
+                            <td><input class="messageCheckbox" name="metodo" type="radio" value="Tarjeta"></td>
+                        </tr>
+                        <tr>
+                            <td>Efectivo</td>
+                            <td><input class="messageCheckbox" name="metodo" type="radio" value="Efectivo"></td>
+                        </tr>
+                    </table>
+                         Mascota
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-7">
+                            <button id="btn"
+                                    th:with="text=compra"
+                                    class="btn" type="submit" th:text="${text}">realizar compra</button>
+                        </div>
+                    </div>
+                </form>
+            </div>         
+        </div>
+    </body>
+</html>

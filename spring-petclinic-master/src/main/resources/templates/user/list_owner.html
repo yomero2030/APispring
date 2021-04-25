@@ -1,0 +1,92 @@
+    <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html
+    th:replace="~{fragments/layout :: layout (~{::body},'list')}">
+    <head>
+        <title>Owners</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+        <style>
+            th {
+                background-color: #29B6F6 !important;
+                color: white;
+            }
+
+            .btn, .btn-danger{
+                background-color: #29B6F6;
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                color: white;
+                width: 100px;
+            }
+
+           
+        </style>
+        
+        <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 20px">Owners existentes</h1></div>        
+              <br/>
+        <div style="width: 100%;display: flex">
+            <table style="margin:auto; width:80%" id="vets" class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Zipcode</th>                
+                    <th>Telephone</th>
+                    <th>Estatus</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="user : ${users}">
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+                        <td th:text="${user.city}"></td>
+                        <td th:text="${user.zipcode}"></td>                    
+                        <td th:text="${user.telephone} == ''? 'Sin numero':${user.telephone}"></td>
+                        <td>
+                            <!--<a th:href="@{/user/update/__${user.id}__}" class="btn btn-default" />Editar</a>-->
+                            <th:block th:if="${user.active} == '1'">
+                                <a class="btn" data-toggle="modal" data-target="#exampleModal" th:id="${user.id}" onclick="btn_delete(this.id)" >Desactivar</a>
+                            </th:block>
+                            <th:block th:unless="${user.active} == '1'">
+                                <a class="btn" data-toggle="modal" data-target="#exampleModal" th:id="${user.id}" onclick="btn_delete(this.id)" >Activar</a>
+                            </th:block>            
+                        </td>
+                  </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 aria-hidden="true">Advertencias</h1>
+              </div>
+              <div class="modal-body">
+                  <p>Estas seguro de cambiar este valor?</p>
+              </div>
+              <div class="modal-footer">
+                  <a id="delete_user" class="btn " style="width: 20%;" >Si</a>
+                <button type="button" class="btn " data-dismiss="modal" style="width: 20%">No</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    //th:href="@{/user/delete/__${user.id}__}" 
+    function btn_delete(id){
+        document.getElementById("delete_user").href = "/user/delete/"+id
+    }
+</script>

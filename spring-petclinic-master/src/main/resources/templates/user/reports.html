@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html 
+    th:replace="~{fragments/layout :: layout (~{::body},'user_reports')}">
+    <body>
+    <style>
+        th {
+            background-color: #29B6F6 !important;
+            color: white;
+        }
+        </style>    
+        <div style="display:flex"><h1 style="margin:auto; margin-top: 20px; margin-bottom:20px;">Reporte</h1></div>
+        <div style="width: 100%;display: flex">
+        <table style="margin:auto; width:80%" id="vets" class="table table-striped">
+            <thead>
+            <tr>
+                <th>Email</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Zipcode</th>
+                <th>Active</th>
+                <th>Telephone</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr th:each="user : ${users}">
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.firstName + ' ' + user.lastName}"></td>
+                    <td th:text="${user.city}"></td>
+                    <td th:text="${user.zipcode}"></td>
+                    <td th:text="${user.active} == '1'? 'Si':'No'"></td>
+                    <td th:text="${user.telephone} == ''? 'Sin numero':${user.telephone}"></td>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+    </body>
+</html>

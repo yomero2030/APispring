@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html
+    th:replace="~{fragments/layout :: layout (~{::body},'update_delete')}">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        
+                <style>
+            button, .btn-default{
+                width: 100%;
+                height: 30px;
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                color: white;
+                background-color: #29B6F6 !important;
+            }
+            
+        </style>
+        
+        <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 20px">Actualizar usuario</h1></div>
+        <div class="alert alert-danger" role="alert" th:if="${exitsError}">
+           Existen valores que causan conflictos, revisalos
+        </div>
+        <div class="col-xs-13 col-sm-3 col-md-3 col-lg-3"></div>
+        <div class="col-xs-13 col-sm-5 col-md-5 col-lg-6">
+            <form th:object="${user}"  th:action="@{/user/update/__${user.id}__}"  id="form" method="post">
+                <table class="table table-striped" th:object="${user}">
+                  <tr>
+                    <th>Email</th>
+                    <td>
+                        <input
+                            id="email"
+                            type="text" 
+                            style="border: 1px; border-color: black; border-style:solid; outline:0; background-color: transparent; width:100%; padding-left: 10px;" 
+                            th:value="${user.email}"
+                            th:field="*{email}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>FirstName</th>
+                    <td>
+                        <input 
+                            id="first_name"
+                            type="text" 
+                            style="border: 1px; border-color: black; border-style:solid; outline:0; background-color: transparent; width:100%; padding-left: 10px;" 
+                            th:value="${user.firstName}" 
+                            th:field="*{firstName}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>LastName</th>
+                    <td>
+                        <input 
+                            id="last_name"
+                            type="text" 
+                            style="border: 1px; border-color: black; border-style:solid; outline:0; background-color: transparent; width:100%; padding-left: 10px;" 
+                            th:value="${user.lastName}" 
+                            th:field="*{lastName}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Password</th>
+                    <td>
+                        <input 
+                            type="password" 
+                            style="border: 1px; border-color: black; border-style:solid; outline:0; background-color: transparent; width:100%; padding-left: 10px;"
+                            th:value="${user.password}"
+                            th:field="*{password}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Active</th>
+                    <td>
+                        <input
+                            id="active"
+                            style="border: 1px; border-color: black; border-style:solid; outline:0; background-color: transparent; width:100%; padding-left: 10px;" 
+                            type="text" 
+                            th:value="${user.active} == 1? 'Si': 'No'"  
+                            th:field="*{active}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Ciudad</th>
+                    <td>
+                        <input
+                            id="active"
+                            style="border: 1px; border-color: black; border-style:solid; outline:0; background-color: transparent; width:100%; padding-left: 10px;" 
+                            type="text" 
+                            th:value="${user.city}"  
+                            th:field="*{city}">
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Zipcode</th>
+                    <td>
+                        <input
+                            id="zipcode"
+                            style="border: 1px; border-color: black; border-style:solid; outline:0; background-color: transparent; width:100%; padding-left: 10px;" 
+                            type="text" 
+                            th:value="${user.zipcode}"  
+                            th:field="*{zipcode}">            
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Telephone</th>
+                    <td>
+                        <input
+                            id="telephone"
+                            style="border: 1px; border-color: black; border-style:solid; outline:0; background-color: transparent; width:100%; padding-left: 10px;" 
+                            type="text" 
+                            th:value="${user.telephone} == ''? 'Sin numero telefononico': ${user.telephone}"  
+                            th:field="*{telephone}">                 
+                    </td>
+                    </tr>
+                </table>
+                <br>
+                
+                
+                <input class="col-xs-13 col-sm-5 col-md-5 col-lg-5 btn btn-default" type="submit" value="Guardar cambios" >
+            </form>
+        </div>
+    </body>
+</html>

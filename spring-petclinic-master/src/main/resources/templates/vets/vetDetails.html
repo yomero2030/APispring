@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'vets')}">
+
+  <body>
+          <style>
+            .button{
+                height: 30px;
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                margin-bottom:10px;
+                color: white;
+                background-color: #29B6F6 !important;
+            }
+            
+            th {
+                background-color: #29B6F6!important;
+                color: white;
+            }
+        </style>
+  
+    <h2 th:text="#{Details}">Vet Information</h2>
+  
+  
+    <table class="table table-striped" th:object="${vet}">
+      <tr>
+        <th th:text="#{Name}">Name</th>
+        <td><b th:text="*{firstName + ' ' + lastName}"></b></td>
+      </tr>
+    <tr>
+        <th th:text="#{Special}">Specialities</th>
+        <td th:text="*{specialty}" /></td>
+      </tr>
+       <tr>
+        <th th:text="#{Telephone}">Telephone</th>
+        <td th:text="*{telephone}" /></td>
+      </tr>
+      <tr>
+        <th th:text="#{Hour}">Schedule</th>
+        <td th:text="*{schedule}" /></td>
+      </tr>
+     
+    </table>
+  
+<a th:text="'Editar Vet'" th:href="@{{id}/edit(id=${vet.id})}" class="btn btn-default">Edit
+      Vet</a>
+      
+      <a th:text="'Eliminar Vet'" th:href="@{{id}/delete(id=${vet.id})}" class="btn btn-default">Delete
+      Vet</a>
+  </body>
+
+</html>

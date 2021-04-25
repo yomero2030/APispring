@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout_owner :: layout (~{::body},'owners')}">
+
+<body>
+    
+    <style>
+        .btn{
+            width: 100%;
+            height: 30px;
+            outline: none !important;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            background-color: #29B6F6 !important;
+        }
+        
+    </style>
+    <p>asbjbid</p>
+    <div style="display:flex; width: 100%; height: 40vh;" >
+        <div class="col-xs-10 col-sm-8 col-md-8 col-lg-5" style="margin:auto;">
+            <h2><th:block th:text="#{np}" th:if="${pet['new']}">New </th:block></h2>
+            <form th:object="${pet}" class="form-horizontal" method="post">
+              <input type="hidden" name="id" th:value="*{id}" />
+              <div class="form-group has-feedback" >
+                <div class="form-group">
+                  <label th:text="#{o}" class="col-sm-2 control-label">Owner</label>
+                  <div class="col-sm-10" style="margin-top:7px;">
+                    <span  th:text="${pet.owner?.firstName + ' ' + pet.owner?.lastName}" />
+                  </div>
+                </div>
+                <input
+                  th:replace="~{fragments/inputField :: input (#{fn}, 'name', 'text')}" />
+                <input 
+                  th:replace="~{fragments/inputField :: input (#{bd}, 'birthDate', 'date')}" />
+                <input
+                  th:replace="~{fragments/selectField :: select (#{ty}, 'type', ${types})}" />
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button
+                    th:with="text=${pet['new']} ? #{ap} : #{up}"
+                    class="btn btn-default" type="submit" th:text="${text}">Add
+                    Pet</button>
+                </div>
+              </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html 
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    th:replace="~{fragments/layout :: layout (~{::body},'product')}">
+
+    <body>
+        <h2 th:text="#{Producto}"></h2>  
+        <table class="table table-striped" th:object="${product}">
+            <tr>
+                <th th:text="#{Producto}"></th>
+                <td><b th:text="*{name}"></b></td>
+            </tr>
+            <tr>
+                <th th:text="#{Descripcion}"></th>
+                <td th:text="*{description}" /></td>
+            </tr>
+            <tr>
+                <th th:text="#{Precio}"></th>
+                <td th:text="*{price}" /></td>
+            </tr>
+            <tr>
+                <th th:text="#{Existencia}"></th>
+                <td th:text="*{existence}" /></td>
+            </tr>
+            <tr>
+                <th th:text="#{Foto}"></th>
+                <td th:text="*{photo}" /></td>
+            </tr>
+        </table>
+        <a th:text="#{editar}" th:href="@{{id}/edit(id=${product.id})}" class="btn btn-default"></a>
+        <a th:text="#{regresar}" th:href="@{/products}" class="btn btn-default"></a>
+
+    </body>
+</html>

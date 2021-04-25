@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
+  <body>
+        <style>
+            th {
+                background-color:  #29B6F6 !important;
+                color: white;
+            } 
+        </style>
+      <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 20px"th:text="#{o}">Owners</h1></div>
+
+     <div style="width: 100%;display: flex">
+        <table style="margin:auto; width:80%" id="vets" class="table table-striped">
+            <thead>
+            <tr>
+                <th th:text="#{fn}" style="width: 150px;">Name</th>
+                <th th:text="#{ad}" style="width: 200px;">Address</th>
+                <th th:text="#{cd}" style="width: 200px;">City</th>
+                <th th:text="#{tf}" style="width: 100px">Telephone</th>
+            </tr>
+            </thead>
+            <tbody>
+              <tr th:each="owner : ${selections}">
+                  <td>
+                      <a th:href="@{/admin/owners/__${owner.id}__}" th:text="${owner.firstName + ' ' + owner.lastName}"/></a>
+                  </td>
+                  <td th:text="${owner.city}"/>
+                  <td th:text="${owner.telephone}"/>
+                  <td><span th:each="pet : ${owner.pets}" th:text="${pet.name} "/></td>
+              </tr>
+            </tbody>
+        </table>
+     </div>
+  </body>
+</html>

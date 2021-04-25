@@ -1,0 +1,75 @@
+<html xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
+<body>
+    <style>
+        
+        .aux-input{
+           outline: none;
+           border-color: inherit;
+           -webkit-box-shadow: none;
+           box-shadow: none;
+           background-color: transparent;
+           width: 100%;
+           border-style: solid;
+           border-radius: 20px;
+           border-color: #29B6F6 ;
+           padding: 10px;
+       }
+
+       .btn{
+           outline: none !important;
+           border: none;
+           border-radius: 20px;
+           background-color:#29B6F6;
+           color: white;
+           width: 15%;
+       }
+      
+
+       .btn-a{
+           font-weight: bold; 
+           text-align: right;
+       }
+
+            
+        .color-add a:hover{
+            font-weight:bold;
+            color:#29B6F6 !important;
+        }
+       
+       @media only screen and (max-width: 990px) {
+           .btn{
+               margin: auto;
+               margin-top: 20px;
+               width: 95%;
+           }
+        }
+       
+       
+    </style>
+  <div class="container space">
+    <div class="row">
+        <form th:object="${owner}" th:action="@{/admin/owners}" method="get"
+          class="form-horizontal" id="search-owner-form">
+            <div  style="display:flex; margin-top: 40px; flex-wrap: wrap">
+              <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                  <input placeholder="Buscar owner" class="aux-input" th:field="*{lastName}" size="20"
+                  maxlength="80" /> <span class="help-inline"><div
+                    th:if="${#fields.hasAnyErrors()}">
+                    <p th:each="err : ${#fields.allErrors()}" th:text="${err}">Error</p>
+                  </div></span>
+              </div>
+              <button th:text="#{fo}" type="submit" class="btn">Find Owner</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+      <div class="col-xs-0 col-sm-0 col-md-10 col-lg-10"></div>
+      <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 btn-a color-add">
+        <a th:text="#{ao}" th:href="@{/owner_signup}">Add Owner</a>
+      </div>
+    </div>
+  <br />
+</body>
+</html>

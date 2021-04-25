@@ -1,0 +1,68 @@
+<html 
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+
+    th:replace="~{fragments/layout :: layout (~{::body},'rep')}">
+
+    <body>
+        
+      <style>
+            th {
+                background-color: #29B6F6 !important;
+                color: white;
+            }
+
+            .btn-default, .btn-danger{
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                color: white;
+                width: 200px;
+            }
+
+            .btn-default{
+                background-color: #29B6F6;
+            }
+
+
+        </style>  
+      
+        <div style="display:flex">
+            <span style="width:100%; text-align: center; margin-top: 20px" th:object="${specialtie}">
+                <h1 th:text="#{especialidad}"></h1>
+                <h4 th:text="${specialtie}"/>
+            </span>
+        </div>
+        <a style="margin-left:10%; margin-top:20px;" th:text="#{regresar}" th:href="@{/appointments/report}" class="btn btn-default"></a><br>
+       <div style="width: 100%;display: flex; margin-top:20px;">
+        <table style="margin:auto; width:80%" id="vets" class="table table-striped">
+            <thead>
+                <tr>
+                    <th th:text="#{numeroCita}" style="width: 200px;"></th>
+                    <th th:text="#{fecha}" style="width: 250px;"></th>
+                    <th th:text="#{hora}" style="width: 150px;"></th>
+                    <th th:text="#{mascota}" style="width: 200px;"></th>
+                    <th th:text="#{confirmacion}" style="width: 150px;"></th>
+                    <th th:text="Confirmar" style="width: 150px;"></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="appointments : ${allAppointments}">
+                    <td th:text="${appointments.id}"/>
+                    <td th:text="${appointments.fecha}"/>
+                    <td th:text="${appointments.hora}"/>
+                    <td th:text="${appointments.mascota}"/>
+                    <td th:if="${appointments.confirmacion == 0}" style="width: 150px; color: red;"
+                        th:text="#{noConfirmado}"/>
+                    <td th:unless="${appointments.confirmacion == 0}" style="width: 150px; color: green;"
+                        th:text="#{confirmado}"/>
+                    <td> <a th:text="Confirmar" th:href="@{/appointments/update/__${appointments.id}__}" class="btn btn-default"></a> </td>
+                </tr>
+            </tbody>
+        </table>
+       </div>
+    </body>
+</html>

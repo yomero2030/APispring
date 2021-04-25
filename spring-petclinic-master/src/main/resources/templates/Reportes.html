@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" th:replace="~{fragments/layout :: layout (~{::body},'rep')}">
+
+    <body>
+        
+        <style>
+            
+            .my_container{
+                margin:auto; 
+                width: 35%;
+            }
+            
+            .myTitle{
+                width:100%; 
+                text-align: center
+            }
+            
+            .btn{
+                margin-top: 8%;
+                width: 100%;
+                height: 30px;
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                color: white;
+                background-color: #29B6F6 !important;
+            }
+            
+            @media only screen and (max-width: 920px) {
+                .my_container {
+                    width: 60%;
+                }
+            }
+            
+            @media only screen and (max-width: 750px) {
+                .my_container {
+                    width: 80%;
+                }
+            }
+            
+        </style>
+        <!--<div class="col-xs-1 col-sm-2 col-md-2 col-lg-3"></div>-->
+        <div style="display:flex; height: 90vh;">
+            <div class="my_container">
+                <h1 class="myTitle">Selecciona unn reporte</h1>
+                <a class="btn btn-default"
+                    type="button" 
+                    href="/admin/owners/1/pets/pet"
+                    style="width:100%;"> Mascotas <a>
+                <a 
+                    class="btn btn-default"
+                    type="button" 
+                    href="/medicamento2"
+                    style="width:100%;"> Medicina <a>
+                <a 
+                    class="btn btn-default"
+                    type="button" 
+                    href="/products/report"
+                    th:text="#{Productos}"
+                    style="width:100%;"/>
+                <a 
+                    class="btn btn-default"
+                    type="button" 
+                    href="/vets2?lastName="
+                    style="width:100%;"> Veterinarios <a>
+                <a 
+                    class="btn btn-default"
+                    type="button" 
+                    href="/appointments/report"
+                    style="width:100%;"> Citas <a>
+                <a 
+                    class="btn"
+                    type="button" 
+                    href="/user/reports"
+                    style="width:100%;"> Reportar usuarios <a>
+                <a  
+                    class="btn btn-default" 
+                    type="button" href="/admin/records" 
+                    style="width:100%;"> Reportes de sesiones <a>
+            </div>
+        </div>
+    </body>
+
+</html>

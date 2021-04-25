@@ -1,0 +1,45 @@
+<html xmlns:th="http://www.thymeleaf.org" 
+    th:replace="~{fragments/layout :: layout (~{::body},'rep')}">
+
+<body>
+    <style>
+        th {
+            background-color: #4CCEAD !important;
+            color: white;
+        }
+        
+        .btn-default, .btn-danger{
+            outline: none !important;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            width: 200px;
+        }
+        
+        .btn-default{
+            background-color: #212121;
+        }
+    </style>
+    <div style="display:flex"><h1 style="margin:auto; margin-top: 20px; margin-bottom:20px;" th:text="#{meds}"></h1></div>
+    <div style="width: 100%;display: flex">
+        <table style="margin:auto; width:80%" id="medicamentos" class="table table-striped">
+        <thead>
+        <tr>
+            <th th:text="#{fn}" style="width: 150px;">Name</th>
+            <th th:text="#{inact}" style="width: 200px;">Ing Act</th>
+            <th th:text="#{prest}" >Presentation</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr th:each="medicamento : ${selections}">
+              <td th:text="${medicamento.nombre}">
+          
+              </td>
+              <td th:text="${medicamento.ingrediente_activo}"/>
+              <td th:text="${medicamento.presentacion}"/>      
+          </tr>
+        </tbody>
+    </table>
+    </div>
+  </body>
+</html>

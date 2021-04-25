@@ -1,0 +1,61 @@
+<html 
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org" 
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    
+    th:replace="~{fragments/layout_owner :: layout (~{::body},'home')}">
+
+    <body>
+        
+        <style>
+            
+            th {
+                background-color:  #29B6F6 !important;
+                color: white;
+            } 
+            
+            .btn{
+                width: 300px;
+                height: 30px;
+                outline: none !important;
+                border: none;
+                border-radius: 20px;
+                margin-bottom:10px;
+                color: white;
+                background-color: #29B6F6 !important;
+            }
+           
+           
+        </style>
+        
+        <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 20px" th:text="#{Productos}"></h1></div>
+       
+        <a style="margin-left:10%; margin-top:20px;" th:text="#{agregarProducto}" class="btn" th:href="@{/product/create-product}"></a>
+
+        <div style="width: 100%;display: flex">
+        <table style="margin:auto; width:80%" id="vets" class="table table-striped">
+            <thead>
+                <tr>
+                    <th th:text="#{Producto}" ></th>
+                    <th th:text="#{Descripcion}" ></th>
+                    <th th:text="#{Precio}" ></th>
+                    <th th:text="#{Existencia}" ></th>
+                    <th colspan="3" ></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${allProducts}">
+                    <td th:text="${product.name}"/>
+                    <td th:text="${product.description}"/>
+                    <td><p style="float: left;">$</p><p th:text=" ${product.price}"/></td>
+                    <td th:text="${product.existence}"/>
+                    <td> <img th:src="@{${product.photo}}" style ="width: 100px; height: 100px;"> </td>
+                    <td> <a th:text="#{editar}" th:href="@{/product/edit/__${product.id}__}" class="btn btn-default"></a> </td>
+                    <td> <a th:text="#{Eliminar}" th:href="@{/product/delete/__${product.id}__}" class="btn btn-default"></a> </td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </body>
+</html>

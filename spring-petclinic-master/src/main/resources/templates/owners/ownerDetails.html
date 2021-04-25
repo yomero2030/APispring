@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
+  <body>
+      <style>
+        th {
+            background-color: #29B6F6 !important;
+            color: white;
+        }
+        
+        .btn-default, .btn-danger{
+            outline: none !important;
+            border: none;
+            border-radius: 20px;
+            color: white;
+            width: 200px;
+        }
+        
+        .btn-default{
+            background-color: #29B6F6;
+        }
+        
+        .btn-default:hover, .style-options:hover{
+            color: #29B6F6;
+            background-color: #E1F5FE;
+        }
+        
+        
+    </style>
+  
+    <div style="display:flex"><h1 style="width:100%; text-align: center; margin-top: 20px" th:text="#{oi}">Owner Information</h1></div>
+  
+    <div style="width: 100%;display: flex">
+        <table style="margin:auto; width:80%" class="table table-striped" th:object="${owner}">
+            <tr>
+              <th th:text="#{fn}">Name</th>
+              <td><b th:text="*{firstName + ' ' + lastName}"></b></td>
+            </tr>
+            <tr>
+              <th th:text="#{ad}">Address</th>
+              <td th:text="*{address}" /></td>
+            </tr>
+            <tr>
+              <th th:text="#{cd}">City</th>
+              <td th:text="*{city}" /></td>
+            </tr>
+            <tr>
+              <th th:text="#{tf}">Telephone</th>
+              <td th:text="*{telephone}" /></td>
+            </tr>
+        </table>
+    </div>
+    <br>
+    <div style="width: 100%; display:flex;">
+        <div style="margin: auto; display:flex; margin-top: 20px;">
+            <a th:text="#{eo}" th:href="@{{id}/edit(id=${owner.id})}" class="btn btn-default">Edit
+              Owner</a>
+              
+
+            <a style="margin-left:20px;" th:text="#{anp}" th:href="@{{id}/pets/new(id=${owner.id})}" class="btn btn-default">Add
+              New Pet</a>
+            
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    
+    <div style="display:flex"><h2 style="width:100%; text-align: center; margin-top: 20px"  th:text="#{pv}">Pets and Visits</h2></div>
+    <div style="width: 100%;display: flex">
+        <table style="margin:auto; width:80%"  class="table table-striped">
+  
+      <tr th:each="pet : ${owner.pets}">
+        <td valign="top">
+          <dl class="dl-horizontal">
+            <dt th:text="#{fn}">Name</dt>
+            <dd th:text="${pet.name}" /></dd>
+            <dt th:text="#{bd}">Birth Date</dt>
+            <dd
+              th:text="${#temporals.format(pet.birthDate, 'yyyy-MM-dd')}" /></dd>
+            <dt th:text="#{ty}">Type</dt>
+            <dd th:text="${pet.type}" /></dd>
+          </dl>
+        </td>
+        <td valign="top">
+          <table class="table-condensed">
+            <thead>
+              <tr>
+                <th th:text="#{vd}">Visit Date</th>
+                <th th:text="#{de}">Description</th>
+              </tr>
+            </thead>
+            <tr th:each="visit : ${pet.visits}">
+              <td th:text="${#temporals.format(visit.date, 'yyyy-MM-dd')}"></td>
+              <td th:text="${visit?.description}"></td>
+            </tr>   
+            <tr>
+              <td><a class="style-options"
+                th:text="#{ep}" th:href="@{{ownerId}/pets/{petId}/edit(ownerId=${owner.id},petId=${pet.id})}">Edit
+                  Pet</a></td>
+              <td><a class="style-options"
+                th:text="#{av}" th:href="@{{ownerId}/pets/{petId}/visits/new(ownerId=${owner.id},petId=${pet.id})}">Add
+                  Visit</a></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+  
+    </table>
+    </div>
+  </body>
+
+</html>
